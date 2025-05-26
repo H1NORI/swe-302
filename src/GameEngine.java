@@ -1,18 +1,19 @@
-public class GameWorld {
-    public int width, height;
+public class GameEngine {
+    public GameWorld world;
+    public Player player;
 
-    //@ invariant width > 0 && height > 0;
-
-    public GameWorld(int width, int height) {
-        this.width = width;
-        this.height = height;
+    //@ requires world != null;
+    //@ requires player != null;
+    public GameEngine(GameWorld world, Player player) {
+        this.world = world;
+        this.player = player;
     }
 
-    /*@ requires 0 <= x && x < width;
-      @ requires 0 <= y && y < height;
-      @ ensures \result;
-      @*/
-    public boolean isValidPosition(int x, int y) {
-        return x >= 0 && x < width && y >= 0 && y < height;
+    //@ requires world.isValidPosition(x, y);
+    //@ ensures player.x == x && player.y == y;
+    //@ assignable player.x, player.y;
+    public void movePlayerTo(int x, int y) {
+        player.x = x;
+        player.y = y;
     }
 }

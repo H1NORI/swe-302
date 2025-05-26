@@ -2,15 +2,16 @@ public class Enemy {
     public int health;
     public int attackPower;
 
-    //@ invariant health >= 0;
-    //@ invariant attackPower >= 0;
-
+    //@ requires health > 0;
+    //@ requires attackPower >= 0;
     public Enemy(int health, int attackPower) {
         this.health = health;
         this.attackPower = attackPower;
     }
 
-    public void attack(Player p) {
-        p.takeDamage(attackPower);
+    //@ requires player != null;
+    //@ requires attackPower >= 0;
+    public void attack(Player player) {
+        player.takeDamage(attackPower);
     }
 }
